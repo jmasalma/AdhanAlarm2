@@ -2,11 +2,11 @@ name: Android CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
     tags:
       - 'v*'
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
   workflow_dispatch: # This line enables manual triggering
 
 jobs:
