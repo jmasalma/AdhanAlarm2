@@ -52,16 +52,4 @@
         <item>@string/month10</item>
         <item>@string/month11</item>
     </array>
-    <array name="languages">
-        <item>@string/sdefault</item>
-        <item>العربية</item>
-        <item>Deutsch</item>
-        <item>English</item>
-        <item>Español</item>
-        <item>Français</item>
-        <item>Indonesia</item>
-        <item>Italiano</item>
-        <item>Русский</item>
-        <item>Türkçe</item>
-    </array>
 </resources>
