@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/widget_background_transparent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/prayer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Next Prayer"
+        android:textColor="@color/widget_text_color"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/prayer_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/prayer_name"
+        android:layout_centerHorizontal="true"
+        android:text="00:00"
+        android:textColor="@color/widget_text_color"
+        android:textSize="36sp" />
+
+</RelativeLayout>

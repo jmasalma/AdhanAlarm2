@@ -106,4 +106,5 @@ public class ScheduleHandler {
         int gmtOffset = now.getTimeZone().getOffset(now.getTimeInMillis());
         return gmtOffset / 3600000.0;
     }
+
 }

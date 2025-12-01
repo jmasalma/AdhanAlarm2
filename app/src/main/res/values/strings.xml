@@ -89,4 +89,13 @@
     <string name="month10">Dhu al-Qi`dah</string>
     <string name="month11">Dhu al-Hijjah</string>
     <string name="anno_hegirae">AH</string>
+    <string-array name="prayer_names">
+        <item>@string/fajr</item>
+        <item>@string/sunrise</item>
+        <item>@string/dhuhr</item>
+        <item>@string/asr</item>
+        <item>@string/maghrib</item>
+        <item>@string/ishaa</item>
+        <item>@string/next_fajr</item>
+    </string-array>
 </resources>
