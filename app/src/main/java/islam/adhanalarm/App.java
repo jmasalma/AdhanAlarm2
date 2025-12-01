@@ -4,7 +4,6 @@ import android.app.Application;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
-// import android.support.v4.content.LocalBroadcastManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class App extends Application {
@@ -12,10 +11,6 @@ public class App extends Application {
     private static App sInstance;
 
     private MediaPlayer mPlayer;
-
-    // public static void broadcastPrayerTimeUpdate() {
-    //     LocalBroadcastManager.getInstance(sInstance).sendBroadcast(new Intent(CONSTANT.ACTION_UPDATE_PRAYER_TIME));
-    // }
 
     public static void startMedia(int resid) {
         sInstance.mPlayer.stop();

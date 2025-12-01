@@ -11,13 +11,17 @@ https://github.com/jmasalma/AdhanAlarm2/releases/latest
 ## ToDo
 
 ### Fix notifications
-Remove it and then ask AI to add it again
+Done - Remove it
+Ask AI to add it again
 
 ### Fix widgets
-Remove it and then ask AI to add it again
+Done - Remove it and then ask AI to add it again.
+Adjust size of widgets so the text shrinks and grows based on size of the widget.
+Make widget style/color to match app
+
 
 ### Remove localization, english only for now...
-Can add it later...
+Done - Can add it later...
 start with arabic, etc.
 
 ### Fix automatic calculation method by region
