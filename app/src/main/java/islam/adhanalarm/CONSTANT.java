@@ -60,6 +60,9 @@ public class CONSTANT {
 	public static final Rounding[] ROUNDING_TYPES = new Rounding[]{Rounding.NONE, Rounding.NORMAL, Rounding.SPECIAL, Rounding.AGRESSIVE};
 	public static final short DEFAULT_ROUNDING_TYPE = 2; // Special
 
+	public static final int REQUEST_CODE_OFFSET = 10;
+	public static final int NOTIFICATION_ID_OFFSET = 100;
+
 	private CONSTANT() {
 		// Private constructor to enforce un-instantiability.
 	}

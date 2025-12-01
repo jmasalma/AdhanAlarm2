@@ -28,6 +28,7 @@ public class App extends Application {
         super.onCreate();
         sInstance = this;
         mPlayer = MediaPlayer.create(this, R.raw.bismillah);
+        NotificationHelper.createNotificationChannel(this);
     }
 
     @Override
