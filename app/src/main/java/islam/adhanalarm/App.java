@@ -13,7 +13,6 @@ public class App extends Application {
 
     private MediaPlayer mPlayer;
 
-    @SuppressLint("UnsafeImplicitIntentLaunch")
     public static void broadcastPrayerTimeUpdate() {
         LocalBroadcastManager.getInstance(sInstance).sendBroadcast(new Intent(CONSTANT.ACTION_UPDATE_PRAYER_TIME));
     }
