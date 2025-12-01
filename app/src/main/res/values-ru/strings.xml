@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name">Азан</string>
     <string name="description">Покажет и может предупредить о времях ежедневных мусульманских молитв.</string>
-    <string name="adhan_next_time">Азан: следующий</string>
-    <string name="adhan_timetable">Азан: расписание</string>
     <string name="previous">Предыдущий</string>
     <string name="next">Следующий</string>
     <string name="stop">Стоп</string>
@@ -37,7 +35,6 @@
     <string name="bearing_qibla">2) Опора Киблы = (1) (+/-) (2)° = (3)°</string>
     <string name="settings">Настройки</string>
     <string name="bismillah_on_boot_up">Бисмиллах при загрузке</string>
-    <string name="notification">Оповещение</string>
     <string name="none">Никакой</string>
     <string name="beep">Гудок</string>
     <string name="recite">Азан</string>

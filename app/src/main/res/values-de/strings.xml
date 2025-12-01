@@ -21,7 +21,6 @@
     <string name="bearing_north">1) Peilung Nord = (1)°</string>
     <string name="bearing_qibla">2) Peilung Qibla = (1) (+/-) (2)° = (3)°</string>
     <string name="settings">Einstellungen</string>
-    <string name="notification">Benachrichtugung</string>
     <string name="none">Keine</string>
     <string name="beep">Beep</string>
     <string name="recite">Rezitieren</string>

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <supports-screens />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:name=".App"
         android:allowBackup="false"
@@ -48,36 +47,5 @@
         </activity>
         <activity android:name=".SettingsActivity"
             android:launchMode="singleTop" />
-        <receiver android:name=".widget.TimetableWidgetProvider" android:exported="false" android:label="@string/adhan_timetable">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_timetable" />
-        </receiver>
-        <receiver android:name=".widget.NextNotificationWidgetProvider" android:exported="false" android:label="@string/adhan_next_time">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_next_notification" />
-        </receiver>
-        <receiver android:name=".receiver.StartNotificationReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="islam.adhanalarm.action.NOTIFY_PRAYER_TIME" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="islam.adhanalarm.action.UPDATE_PRAYER_TIME" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".receiver.HandleNotificationReceiver" android:exported="false">
-            <intent-filter>
-                <action android:name="islam.adhanalarm.action.NOTIFICATION_CLICKED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="islam.adhanalarm.action.NOTIFICATION_DELETED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="islam.adhanalarm.action.NOTIFICATION_STOPPED" />
-            </intent-filter>
-        </receiver>
     </application>
 </manifest>

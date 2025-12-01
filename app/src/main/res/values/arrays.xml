@@ -38,28 +38,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-    <array name="notification_methods">
-        <item>@string/none</item>
-        <item>@string/sdefault</item>
-        <item>@string/beep</item>
-        <item>@string/recite</item>
-    </array>
-    <string-array name="notification_methods_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-    <array name="notification_methods_sunrise">
-        <item>@string/none</item>
-        <item>@string/sdefault</item>
-        <item>@string/beep</item>
-    </array>
-    <string-array name="notification_methods_sunrise_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
     <array name="hijri_months">
         <item>@string/month0</item>
         <item>@string/month1</item>

@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name">برنامج المنبه للأذان</string>
     <string name="description">برنامج لعرض أوقات الصلاة مع امكانية التنبية اليومي لكل صلاة.</string>
-    <string name="adhan_next_time">الأذان: الوقت القادم</string>
-    <string name="adhan_timetable">الأذان: أوقات الصلاة</string>
     <string name="previous">السابق</string>
     <string name="next">التالي</string>
     <string name="stop">ايقاف</string>
@@ -37,7 +35,6 @@
     <string name="bearing_qibla">2) اتجاة القبلة = (1) (+/-) (2)° = (3)°</string>
     <string name="settings">اعدادات</string>
     <string name="bismillah_on_boot_up">تشغيل البسملة عند الاقلاع</string>
-    <string name="notification">التنبيهات</string>
     <string name="none">بدون</string>
     <string name="beep">صوت بيب</string>
     <string name="recite">تلاوة</string>

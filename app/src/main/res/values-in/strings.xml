@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name">Pengingat Adzan</string>
     <string name="description">Menampilkan dan mengingatkan anda pada waktu sembahyang.</string>
-    <string name="adhan_next_time">Adzan: Berikutnya</string>
-    <string name="adhan_timetable">Adzan: Jadwal</string>
     <string name="previous">Sebelumnya</string>
     <string name="next">Sesudahnya</string>
     <string name="stop">Berhenti</string>
@@ -33,7 +31,6 @@
     <string name="bearing_qibla">2) Arah Kiblat = (1) (+/-) (2)° = (3)°</string>
     <string name="settings">Pengaturan</string>
     <string name="bismillah_on_boot_up">Bismillah Saat Mulai</string>
-    <string name="notification">Pengingat</string>
     <string name="none">Kosong</string>
     <string name="beep">Bunyian</string>
     <string name="recite">Adzan</string>

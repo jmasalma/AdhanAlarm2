@@ -31,51 +31,6 @@
             android:defaultValue="0" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/notification">
-        <ListPreference
-            android:key="notificationMethod0"
-            android:title="@string/fajr"
-            android:summary="%s"
-            android:entries="@array/notification_methods"
-            android:entryValues="@array/notification_methods_values"
-            android:defaultValue="1" />
-        <ListPreference
-            android:key="notificationMethod1"
-            android:title="@string/sunrise"
-            android:summary="%s"
-            android:entries="@array/notification_methods_sunrise"
-            android:entryValues="@array/notification_methods_sunrise_values"
-            android:defaultValue="1" />
-        <ListPreference
-            android:key="notificationMethod2"
-            android:title="@string/dhuhr"
-            android:summary="%s"
-            android:entries="@array/notification_methods"
-            android:entryValues="@array/notification_methods_values"
-            android:defaultValue="1" />
-        <ListPreference
-            android:key="notificationMethod3"
-            android:title="@string/asr"
-            android:summary="%s"
-            android:entries="@array/notification_methods"
-            android:entryValues="@array/notification_methods_values"
-            android:defaultValue="1" />
-        <ListPreference
-            android:key="notificationMethod4"
-            android:title="@string/maghrib"
-            android:summary="%s"
-            android:entries="@array/notification_methods"
-            android:entryValues="@array/notification_methods_values"
-            android:defaultValue="1" />
-        <ListPreference
-            android:key="notificationMethod5"
-            android:title="@string/ishaa"
-            android:summary="%s"
-            android:entries="@array/notification_methods"
-            android:entryValues="@array/notification_methods_values"
-            android:defaultValue="1" />
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/advanced">
         <EditTextPreference
             android:key="altitude"

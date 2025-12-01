@@ -2,8 +2,6 @@
 <resources>
     <string name="app_name">Adhān Alarma</string>
     <string name="description">Muestra y puede alertar a los tiempos de oración diaria musulmán.</string>
-    <string name="adhan_next_time">Adhān: La próxima vez</string>
-    <string name="adhan_timetable">Adhān: Calendario</string>
     <string name="previous">Anterior</string>
     <string name="next">Siguiente</string>
     <string name="stop">Detener</string>
@@ -28,7 +26,6 @@
     <string name="bearing_qibla">2) Teniendo Qibla = (1) (+/-) (2)° = (3)°</string>
     <string name="settings">Configuración</string>
     <string name="bismillah_on_boot_up">Bismillah en el arranque</string>
-    <string name="notification">Notificación</string>
     <string name="none">Ninguno</string>
     <string name="beep">Pitido</string>
     <string name="recite">Recitar</string>
