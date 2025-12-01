@@ -13,9 +13,9 @@ public class App extends Application {
 
     private MediaPlayer mPlayer;
 
-    public static void broadcastPrayerTimeUpdate() {
-        LocalBroadcastManager.getInstance(sInstance).sendBroadcast(new Intent(CONSTANT.ACTION_UPDATE_PRAYER_TIME));
-    }
+    // public static void broadcastPrayerTimeUpdate() {
+    //     LocalBroadcastManager.getInstance(sInstance).sendBroadcast(new Intent(CONSTANT.ACTION_UPDATE_PRAYER_TIME));
+    // }
 
     public static void startMedia(int resid) {
         sInstance.mPlayer.stop();
