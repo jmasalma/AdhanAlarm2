@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.util.Log;
@@ -28,9 +29,10 @@ import java.util.Set;
 import islam.adhanalarm.handler.LocationHandler;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-    final Set<String> TEXT_ENTRIES = new HashSet<>(Arrays.asList(
+    final Set<String> PREFS_TO_UPDATE_SUMMARY = new HashSet<>(Arrays.asList(
             "latitude",
             "longitude",
+            "beforePrayerNotification",
             "altitude",
             "pressure",
             "temperature",
@@ -137,7 +139,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private void syncEncryptedToUi() {
         SharedPreferences uiPrefs = getPreferenceManager().getSharedPreferences();
         SharedPreferences.Editor uiEditor = uiPrefs.edit();
-        for (String key : TEXT_ENTRIES) {
+        for (String key : PREFS_TO_UPDATE_SUMMARY) {
             String value = mEncryptedSharedPreferences.getString(key, null);
             if (value != null) {
                 uiEditor.putString(key, value);
@@ -150,7 +152,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         // Summaries are based on the UI preferences
         Map<String, ?> preferencesMap = getPreferenceManager().getSharedPreferences().getAll();
         for (Map.Entry<String, ?> preferenceEntry : preferencesMap.entrySet()) {
-            if (TEXT_ENTRIES.contains(preferenceEntry.getKey())) {
+            if (PREFS_TO_UPDATE_SUMMARY.contains(preferenceEntry.getKey())) {
                 Preference pref = findPreference(preferenceEntry.getKey());
                 if (pref instanceof EditTextPreference) {
                     updateSummary((EditTextPreference) pref);
@@ -168,13 +170,13 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         // This is called when UI (default) preferences change
-        if (TEXT_ENTRIES.contains(key)) {
-            // Update summary
+        if (PREFS_TO_UPDATE_SUMMARY.contains(key)) {
             Preference pref = findPreference(key);
             if (pref instanceof EditTextPreference) {
                 updateSummary((EditTextPreference) pref);
+            } else if (pref instanceof ListPreference) {
+                updateListSummary((ListPreference) pref);
             }
-
             // Sync the change to encrypted preferences
             SharedPreferences.Editor encryptedEditor = mEncryptedSharedPreferences.edit();
             encryptedEditor.putString(key, sharedPreferences.getString(key, ""));
@@ -185,6 +187,12 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private void updateSummary(EditTextPreference preference) {
         if (preference != null) {
             preference.setSummary(preference.getText());
+        }
+    }
+
+    private void updateListSummary(ListPreference preference) {
+        if (preference != null) {
+            preference.setSummary(preference.getEntry());
         }
     }
 }

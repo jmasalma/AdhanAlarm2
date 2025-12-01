@@ -29,6 +29,13 @@
             android:entries="@array/time_format"
             android:entryValues="@array/time_format_values"
             android:defaultValue="0" />
+        <ListPreference
+            android:key="beforePrayerNotification"
+            android:title="@string/before_prayer_notification"
+            android:summary="%s"
+            android:entries="@array/before_prayer_notification_entries"
+            android:entryValues="@array/before_prayer_notification_values"
+            android:defaultValue="15" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/advanced">

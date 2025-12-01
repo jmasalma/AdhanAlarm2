@@ -117,11 +117,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         }
                         settings.edit().putString("calculationMethodsIndex", calculationMethodIndex).apply()
                     }
-                    val roundingTypeIndex = settings.getString("roundingTypesIndex", CONSTANT.DEFAULT_ROUNDING_TYPE.toString())
-                    val offsetMinutes = settings.getString("offsetMinutes", "0")?.toInt() ?: 0
-                    val newScheduleData = ScheduleHandler.calculate(locationAstro, calculationMethodIndex, roundingTypeIndex, offsetMinutes)
-                    _scheduleData.postValue(newScheduleData)
-
+                    val newScheduleData = PrayerTimeScheduler.scheduleAlarms(getApplication())
+                    if (newScheduleData != null) {
+                        _scheduleData.postValue(newScheduleData)
+                    }
                     // Calculate and post qibla direction
                     val qibla = Jitl.getNorthQibla(locationAstro)
                     _qiblaDirection.postValue(qibla.getDecimalValue(Direction.NORTH))

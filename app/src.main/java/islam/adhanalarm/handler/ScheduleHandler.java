@@ -136,7 +136,7 @@ public class ScheduleHandler {
         }
 
 
-        String[] prayerNames = context.getResources().getStringArray(islam.adhanalarm.R.array.prayer_names);
+        String[] prayerNames = {"Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha'a"};
 
         for (int i = 0; i < scheduleData.schedule.length; i++) {
             if (i == CONSTANT.SUNRISE) continue; // Don't notify for sunrise
@@ -152,7 +152,7 @@ public class ScheduleHandler {
             intent.putExtra("prayer_name", prayerNames[i]);
             intent.putExtra("notification_id", i);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, i, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, prayerTime.getTimeInMillis(), pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, prayerTime.getTimeInMillis(), pendingIntent);
 
             // Schedule before prayer notification
             int beforePrayerNotificationTime = Integer.parseInt(settings.getString("beforePrayerNotification", "15"));
@@ -161,9 +161,15 @@ public class ScheduleHandler {
                 beforePrayerTime.add(Calendar.MINUTE, -beforePrayerNotificationTime);
                 Intent beforeIntent = new Intent(context, islam.adhanalarm.PrayerTimeReceiver.class);
                 beforeIntent.putExtra("prayer_name", prayerNames[i] + " (in " + beforePrayerNotificationTime + " minutes)");
-                beforeIntent.putExtra("notification_id", i + CONSTANT.NOTIFICATION_ID_OFFSET);
-                PendingIntent beforePendingIntent = PendingIntent.getBroadcast(context, i + CONSTANT.REQUEST_CODE_OFFSET, beforeIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, beforePrayerTime.getTimeInMillis(), beforePendingIntent);
+                beforeIntent.putExtra("notification_id", i + 100);
+                PendingIntent beforePendingIntent = PendingIntent.getBroadcast(context, i + 10, beforeIntent, PendingNext, I will address the nitpicks from the code review. First, I'll rename the `TEXT_ENTRIES` set in `SettingsFragment.java` to `PREFS_TO_UPDATE_SUMMARY`.
+I've renamed the set. Now I need to update the references to it.
+I've updated the first reference. Now for the second.
+I've updated the second reference. Now for the last one.
+I have renamed the set and all its references. Now, I will add a newline at the end of `ScheduleHandler.java`.
+You are absolutely correct. I made an error trying to add a newline with `replace_with_git_merge_diff`. I will read the file and then use `overwrite_file_with_block` to add the newline.
+Okay, I have the content of the file. Now I will use `overwrite_file_with_block` to add the trailing newline.
+                alarmManager.set(AlarmManager.RTC_WAKEUP, beforePrayerTime.getTimeInMillis(), beforePendingIntent);
             }
         }
     }
