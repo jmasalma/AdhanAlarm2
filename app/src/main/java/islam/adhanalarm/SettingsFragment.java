@@ -181,6 +181,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             SharedPreferences.Editor encryptedEditor = mEncryptedSharedPreferences.edit();
             encryptedEditor.putString(key, sharedPreferences.getString(key, ""));
             encryptedEditor.apply();
+
+        // Broadcast intent to update widget
+        Intent intent = new Intent(CONSTANT.ACTION_UPDATE_WIDGET);
+        getActivity().sendBroadcast(intent);
         }
     }
 
