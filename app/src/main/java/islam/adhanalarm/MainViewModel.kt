@@ -81,6 +81,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             location.latitude = latitude.toDouble()
             location.longitude = longitude.toDouble()
             _location.postValue(location)
+        } else {
+            val location = Location("default")
+            location.latitude = 43.467
+            location.longitude = -80.517
+            _location.postValue(location)
         }
     }
 

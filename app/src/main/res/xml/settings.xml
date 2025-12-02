@@ -21,7 +21,7 @@
             android:summary="%s"
             android:entries="@array/calculation_methods"
             android:entryValues="@array/calculation_methods_values"
-            android:defaultValue="4" />
+            android:defaultValue="3" />
         <ListPreference
             android:key="timeFormatIndex"
             android:title="@string/time_format"
