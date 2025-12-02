@@ -57,6 +57,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         _scheduleData.addSource(_location) { updateData() }
         _qiblaDirection.addSource(_location) { updateData() }
+
+        loadLocationFromSettings()
     }
 
     fun startCompass() {
