@@ -26,6 +26,11 @@ import kotlin.coroutines.suspendCoroutine
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
+    companion object {
+        private const val KEY_LATITUDE = "latitude"
+        private const val KEY_LONGITUDE = "longitude"
+    }
+
     private val compassHandler: CompassHandler
     private val locationHandler: LocationHandler
     private val masterKey = MasterKey.Builder(application, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
@@ -53,12 +58,22 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         compassHandler = CompassHandler(application.getSystemService(Context.SENSOR_SERVICE) as SensorManager)
         locationHandler = LocationHandler(application.getSystemService(Context.LOCATION_SERVICE) as LocationManager)
         northDirection = compassHandler.northDirection
-        _location.addSource(locationHandler.location) { _location.postValue(it) }
+        _location.addSource(locationHandler.location) {
+            saveLocation(it)
+            _location.postValue(it)
+        }
 
-        _scheduleData.addSource(_location) { updateData() }
-        _qiblaDirection.addSource(_location) { updateData() }
+        _scheduleData.addSource(_location) { it?.let { loc -> updateData(loc) } }
+        _qiblaDirection.addSource(_location) { it?.let { loc -> updateData(loc) } }
 
         loadLocationFromSettings()
+    }
+
+    private fun saveLocation(location: Location) {
+        settings.edit()
+            .putString(KEY_LATITUDE, location.latitude.toString())
+            .putString(KEY_LONGITUDE, location.longitude.toString())
+            .apply()
     }
 
     fun startCompass() {
@@ -76,8 +91,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loadLocationFromSettings() {
-        val latitude = settings.getString("latitude", null)
-        val longitude = settings.getString("longitude", null)
+        val latitude = settings.getString(KEY_LATITUDE, null)
+        val longitude = settings.getString(KEY_LONGITUDE, null)
         if (latitude != null && longitude != null) {
             val location = Location("settings")
             location.latitude = latitude.toDouble()
@@ -91,17 +106,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 .putString("latitude", location.latitude.toString())
                 .putString("longitude", location.longitude.toString())
                 .apply()
+            saveLocation(location)
             _location.postValue(location)
         }
     }
 
-    fun updateData() {
-        location.value?.let { loc ->
-            viewModelScope.launch {
-                withContext(Dispatchers.IO) {
-                    val latitude = loc.latitude.toString()
-                    val longitude = loc.longitude.toString()
-                    val altitude = settings.getString("altitude", "0")
+    fun updateData(loc: Location) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val latitude = loc.latitude.toString()
+                val longitude = loc.longitude.toString()
+                val altitude = settings.getString("altitude", "0")
                     val pressure = settings.getString("pressure", "1010")
                     val temperature = settings.getString("temperature", "10")
 
@@ -137,7 +152,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     _qiblaDirection.postValue(qibla.getDecimalValue(Direction.NORTH))
                 }
             }
-        }
     }
 
     private suspend fun awaitGetFromLocation(geocoder: android.location.Geocoder, latitude: Double, longitude: Double): List<android.location.Address>? {
