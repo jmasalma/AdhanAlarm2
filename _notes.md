@@ -8,23 +8,52 @@
 https://github.com/jmasalma/AdhanAlarm2/releases/latest
 
 
+## Increment tag
+
+```bash
+
+git pull --prune
+latest_tag=$(git describe --abbrev=0 --tags)
+new_tag=$(echo "$latest_tag" | awk -F'.' -v OFS='.' '{$NF++; print $0}')
+echo Moving tag from ${latest_tag} to ${new_tag}
+
+git tag ${new_tag}
+git push origin --tags
+
+```
+
+
+
 ## ToDo
+
+### Fixs
+Done - when the app first starts after being installed or data cleared, the today tab is empty.  It populates after I go to settings an click get GPS Location
 
 ### Fix notifications
 Done - Remove it
-Ask AI to add it again
+Done - Ask AI to add it again
+Done ? - seems to be working now! - Not working, could be because latest android does not show notifications form sideloaded app, try on an older android...
 
 ### Fix widgets
 Done - Remove it and then ask AI to add it again.
-Adjust size of widgets so the text shrinks and grows based on size of the widget.
-Make widget style/color to match app
+Done - Make sure widget is updated when something changes in the app setting, e.g. GPS location, calculation method, etc.
+Done - Make widget style/color to match app
+? - Adjust size of widgets so the text shrinks and grows based on size of the widget.
+Done - Make smaller widget match app style and make it a 1x1 if possible
+Done - Make larger widget default to 4x4
+- Make widget narrower
+- reformat 1x1 widget
 
+### Fix automatic calculation method by region
+Done - Make ISNA the default calculation method
+- Fix so the right calculation method is used per region
 
 ### Remove localization, english only for now...
 Done - Can add it later...
-start with arabic, etc.
+- start with arabic, etc.
 
-### Fix automatic calculation method by region
+### Harden
+- Add tests
 
 
 ## Add the following setup scripts
