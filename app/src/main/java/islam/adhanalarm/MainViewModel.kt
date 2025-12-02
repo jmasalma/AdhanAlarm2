@@ -63,8 +63,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _location.postValue(it)
         }
 
-        _scheduleData.addSource(_location) { updateData() }
-        _qiblaDirection.addSource(_location) { updateData() }
+        _scheduleData.addSource(_location) { it?.let { loc -> updateData(loc) } }
+        _qiblaDirection.addSource(_location) { it?.let { loc -> updateData(loc) } }
 
         loadLocationFromSettings()
     }
@@ -102,18 +102,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val location = Location("default")
             location.latitude = 43.467
             location.longitude = -80.517
+            settings.edit()
+                .putString("latitude", location.latitude.toString())
+                .putString("longitude", location.longitude.toString())
+                .apply()
             saveLocation(location)
             _location.postValue(location)
         }
     }
 
-    fun updateData() {
-        location.value?.let { loc ->
-            viewModelScope.launch {
-                withContext(Dispatchers.IO) {
-                    val latitude = loc.latitude.toString()
-                    val longitude = loc.longitude.toString()
-                    val altitude = settings.getString("altitude", "0")
+    fun updateData(loc: Location) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                val latitude = loc.latitude.toString()
+                val longitude = loc.longitude.toString()
+                val altitude = settings.getString("altitude", "0")
                     val pressure = settings.getString("pressure", "1010")
                     val temperature = settings.getString("temperature", "10")
 
@@ -149,7 +152,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     _qiblaDirection.postValue(qibla.getDecimalValue(Direction.NORTH))
                 }
             }
-        }
     }
 
     private suspend fun awaitGetFromLocation(geocoder: android.location.Geocoder, latitude: Double, longitude: Double): List<android.location.Address>? {
