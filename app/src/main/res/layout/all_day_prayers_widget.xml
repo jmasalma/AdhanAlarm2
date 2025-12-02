@@ -2,7 +2,7 @@
     android:id="@+id/prayers_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/widget_background_solid"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:padding="16dp">
 

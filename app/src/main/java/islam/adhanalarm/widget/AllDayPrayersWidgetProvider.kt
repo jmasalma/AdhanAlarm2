@@ -32,7 +32,7 @@ class AllDayPrayersWidgetProvider : BaseWidgetProvider() {
                 prayerRow.setTextViewText(R.id.prayer_time, prayerTime)
 
                 if (i.toShort() == schedule.nextTimeIndex) {
-                    prayerRow.setInt(R.id.prayer_row_layout, "setBackgroundColor", context.getColor(R.color.widget_highlight_color))
+                    prayerRow.setInt(R.id.prayer_row_layout, "setBackgroundColor", context.getColor(R.color.colorAccent))
                 }
 
                 views.addView(R.id.prayers_layout, prayerRow)

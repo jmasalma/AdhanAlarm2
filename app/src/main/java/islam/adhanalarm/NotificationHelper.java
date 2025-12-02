@@ -1,5 +1,6 @@
 package islam.adhanalarm;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -21,6 +22,7 @@ public class NotificationHelper {
         }
     }
 
+    @SuppressLint("MissingPermission")
     public static void showNotification(Context context, String title, String message, int notificationId) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)

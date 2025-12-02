@@ -29,8 +29,8 @@ class PrayerTimesRepository(private val context: Context) {
             val altitude = settings.getString("altitude", "0")
             val pressure = settings.getString("pressure", "1010")
             val temperature = settings.getString("temperature", "10")
-            val calculationMethodIndex = settings.getString("calculationMethodsIndex", CONSTANT.DEFAULT_CALCULATION_METHOD.toString())
-            val roundingTypeIndex = settings.getString("roundingTypesIndex", CONSTANT.DEFAULT_ROUNDING_TYPE.toString())
+            val calculationMethodIndex = settings.getString("calculationMethodsIndex", CONSTANT.DEFAULT_CALCULATION_METHOD)
+            val roundingTypeIndex = settings.getString("roundingTypesIndex", CONSTANT.DEFAULT_ROUNDING_TYPE)
             val offsetMinutes = settings.getInt("offsetMinutes", 0)
 
             val location = ScheduleHandler.getLocation(latitude, longitude, altitude, pressure, temperature)
