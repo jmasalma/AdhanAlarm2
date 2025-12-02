@@ -1,15 +1,37 @@
 package islam.adhanalarm;
 
+import net.sourceforge.jitl.Method;
+import net.sourceforge.jitl.Rounding;
+
 public class CONSTANT {
     public static final String ACTION_UPDATE_PRAYER_TIMES = "islam.adhanalarm.ACTION_UPDATE_PRAYER_TIMES";
     public static final String ACTION_UPDATE_WIDGET = "islam.adhanalarm.ACTION_UPDATE_WIDGET";
-    public static final int FAJR = 0;
-    public static final int SUNRISE = 1;
-    public static final int DHUHR = 2;
-    public static final int ASR = 3;
-    public static final int MAGHRIB = 4;
-    public static final int ISHAA = 5;
-    public static final int NEXT_FAJR = 6;
-    public static final int[][] CALCULATION_METHOD_COUNTRY_CODES = new int[0][];
-    public static final int DEFAULT_CALCULATION_METHOD = 0;
+    public static final short FAJR = 0;
+    public static final short SUNRISE = 1;
+    public static final short DHUHR = 2;
+    public static final short ASR = 3;
+    public static final short MAGHRIB = 4;
+    public static final short ISHAA = 5;
+    public static final short NEXT_FAJR = 6;
+    public static final String[][] CALCULATION_METHOD_COUNTRY_CODES = new String[0][];
+    public static final String DEFAULT_CALCULATION_METHOD = "4";
+    public static final String DEFAULT_ROUNDING_TYPE = "2";
+    public static final int DEFAULT_TIME_FORMAT = 0;
+    public static final int NOTIFICATION_ID_OFFSET = 10;
+    public static final int REQUEST_CODE_OFFSET = 10;
+    public static final Method[] CALCULATION_METHODS = {
+            new Method(16, 14, 1.5, 0, 0, 0, Rounding.SPECIAL, net.sourceforge.jitl.Mathhab.SHAAFI, 48.5, net.sourceforge.jitl.ExtremeLatitude.GOOD_INVALID, false, 0, 0, 0, 0, 0, 0),
+            Method.ISNA,
+            Method.MUSLIM_LEAGUE,
+            Method.UMM_ALQURRA,
+            Method.EGYPT_SURVEY,
+            new Method(18, 18, 1.5, 0, 0, 0, Rounding.SPECIAL, net.sourceforge.jitl.Mathhab.HANAFI, 48.5, net.sourceforge.jitl.ExtremeLatitude.GOOD_INVALID, false, 0, 0, 0, 0, 0, 0),
+            new Method(18, 18, 1.5, 0, 0, 0, Rounding.SPECIAL, net.sourceforge.jitl.Mathhab.SHAAFI, 48.5, net.sourceforge.jitl.ExtremeLatitude.GOOD_INVALID, false, 0, 0, 0, 0, 0, 0)
+    };
+    public static final Rounding[] ROUNDING_TYPES = {
+            Rounding.NONE,
+            Rounding.NORMAL,
+            Rounding.SPECIAL,
+            Rounding.AGRESSIVE
+    };
 }

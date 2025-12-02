@@ -183,7 +183,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             encryptedEditor.apply();
 
         // Broadcast intent to update widget
-        Intent intent = new Intent(CONSTANT.ACTION_UPDATE_WIDGET);
+        Intent intent = new Intent(getActivity(), PrayerTimeReceiver.class);
+        intent.setAction(CONSTANT.ACTION_UPDATE_WIDGET);
         getActivity().sendBroadcast(intent);
         }
     }

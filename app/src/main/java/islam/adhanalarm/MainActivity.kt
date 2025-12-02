@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 viewModel.updateLocation()
-                sendBroadcast(Intent(CONSTANT.ACTION_UPDATE_PRAYER_TIMES))
+                val intent = Intent(this, PrayerTimeReceiver::class.java)
+                intent.action = CONSTANT.ACTION_UPDATE_PRAYER_TIMES
+                sendBroadcast(intent)
             } else {
                 viewModel.loadLocationFromSettings()
             }

@@ -89,7 +89,7 @@ fun DefaultPreview() {
         Array(7) { java.util.GregorianCalendar() },
         BooleanArray(7) { false },
         fi.joensuu.joyds1.calendar.IslamicCalendar(),
-        CONSTANT.DHUHR
+        CONSTANT.DHUHR.toShort()
 
     )
     PrayerTimeList(scheduleData = dummyScheduleData)
