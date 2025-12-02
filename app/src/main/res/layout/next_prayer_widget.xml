@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/widget_background_transparent"
-    android:padding="16dp">
+    android:background="@color/colorPrimary"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/prayer_name"
@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:text="Next Prayer"
         android:textColor="@color/widget_text_color"
-        android:textSize="24sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/prayer_time"
@@ -21,6 +21,6 @@
         android:layout_centerHorizontal="true"
         android:text="00:00"
         android:textColor="@color/widget_text_color"
-        android:textSize="36sp" />
+        android:textSize="18sp" />
 
 </RelativeLayout>
