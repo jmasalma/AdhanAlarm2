@@ -87,6 +87,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val location = Location("default")
             location.latitude = 43.467
             location.longitude = -80.517
+            settings.edit()
+                .putString("latitude", location.latitude.toString())
+                .putString("longitude", location.longitude.toString())
+                .apply()
             _location.postValue(location)
         }
     }
