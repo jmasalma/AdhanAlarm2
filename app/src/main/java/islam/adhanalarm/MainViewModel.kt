@@ -113,7 +113,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                             }
                         }
                         if (calculationMethodIndex == null) {
-                            calculationMethodIndex = CONSTANT.DEFAULT_CALCULATION_METHOD.toString()
+                            calculationMethodIndex = CONSTANT.DEFAULT_CALCULATION_METHOD
                         }
                         settings.edit().putString("calculationMethodsIndex", calculationMethodIndex).apply()
                     }
