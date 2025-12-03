@@ -75,8 +75,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .putString(KEY_LATITUDE, location.latitude.toString())
             .putString(KEY_LONGITUDE, location.longitude.toString())
             .apply()
-        val intent = Intent(getApplication(), PrayerTimeReceiver::class.java)
-        intent.action = CONSTANT.ACTION_LOCATION_UPDATED
+        val intent = Intent(CONSTANT.ACTION_LOCATION_UPDATED)
         getApplication<Application>().sendBroadcast(intent)
     }
 
