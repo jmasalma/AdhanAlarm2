@@ -18,6 +18,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
 
@@ -148,7 +149,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
         updateSummaries();
 
-        getActivity().registerReceiver(mLocationUpdatedReceiver, new IntentFilter(CONSTANT.ACTION_LOCATION_UPDATED));
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mLocationUpdatedReceiver, new IntentFilter(CONSTANT.ACTION_LOCATION_UPDATED));
     }
 
     private void syncEncryptedToUi() {
@@ -180,7 +181,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onPause() {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
-        getActivity().unregisterReceiver(mLocationUpdatedReceiver);
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mLocationUpdatedReceiver);
     }
 
     @Override
