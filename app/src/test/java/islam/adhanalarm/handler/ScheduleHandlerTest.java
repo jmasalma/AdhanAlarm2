@@ -134,17 +134,5 @@ public class ScheduleHandlerTest {
         now.set(Calendar.HOUR_OF_DAY, 18); // 6:00 PM
         String expectedDateAfterSunset = "20 Jumada al-thani, 1445 AH";
         assertEquals(expectedDateAfterSunset, ScheduleHandler.getHijriDateString(hijriDate, schedule, hijriMonths, anooHegirae, now));
-        GregorianCalendar[] schedule = scheduleData.schedule;
-        assertNotNull(schedule);
-        assertEquals(7, schedule.length);
-
-        // Verify that the prayer times are in the correct order
-        for (int i = 0; i < schedule.length - 1; i++) {
-            assertTrue(schedule[i].before(schedule[i+1]));
-        }
-
-        // Verify that the next prayer index is calculated correctly
-        short nextPrayerIndex = scheduleData.nextTimeIndex;
-        assertTrue(nextPrayerIndex >= 0 && nextPrayerIndex < schedule.length);
     }
 }

@@ -2,7 +2,6 @@ package islam.adhanalarm
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -31,7 +30,7 @@ class MainViewModelTest {
         val masterKey = MasterKey.Builder(application, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
             .build()
-        val prefs = EncryptedSharedPreferences.create(
+        prefs = EncryptedSharedPreferences.create(
             application,
             "secret_shared_prefs",
             masterKey,
@@ -56,16 +55,6 @@ class MainViewModelTest {
     @Test
     fun `test initial location is loaded from settings`() {
         // Given
-        val masterKey = MasterKey.Builder(application, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        val prefs = EncryptedSharedPreferences.create(
-            application,
-            "secret_shared_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
         prefs.edit()
             .putString("latitude", "34.0522")
             .putString("longitude", "-118.2437")
