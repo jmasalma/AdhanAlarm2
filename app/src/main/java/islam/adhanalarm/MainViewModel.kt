@@ -2,7 +2,9 @@ package islam.adhanalarm
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.hardware.SensorManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
@@ -74,6 +76,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .putString(KEY_LATITUDE, location.latitude.toString())
             .putString(KEY_LONGITUDE, location.longitude.toString())
             .apply()
+        val intent = Intent(CONSTANT.ACTION_LOCATION_UPDATED)
+        LocalBroadcastManager.getInstance(getApplication()).sendBroadcast(intent)
     }
 
     fun startCompass() {

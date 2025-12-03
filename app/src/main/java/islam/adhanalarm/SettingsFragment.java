@@ -1,7 +1,9 @@
 package islam.adhanalarm;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -16,6 +18,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
 
@@ -41,6 +44,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     private SharedPreferences mEncryptedSharedPreferences;
     private LocationHandler mLocationHandler;
     private Observer<Location> mLocationObserver;
+    private BroadcastReceiver mLocationUpdatedReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         mLocationHandler.getLocation().observeForever(mLocationObserver);
 
 
+        mLocationUpdatedReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(CONSTANT.ACTION_LOCATION_UPDATED)) {
+                    syncEncryptedToUi();
+                    updateSummaries();
+                }
+            }
+        };
+
         findPreference("lookupGPS").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 mLocationHandler.update();
@@ -134,6 +148,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         syncEncryptedToUi();
 
         updateSummaries();
+
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mLocationUpdatedReceiver, new IntentFilter(CONSTANT.ACTION_LOCATION_UPDATED));
     }
 
     private void syncEncryptedToUi() {
@@ -165,6 +181,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onPause() {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mLocationUpdatedReceiver);
     }
 
     @Override
