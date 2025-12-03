@@ -8,6 +8,9 @@ import android.content.SharedPreferences;
 import android.text.format.DateFormat;
 
 import androidx.security.crypto.EncryptedSharedPreferences;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import androidx.security.crypto.MasterKey;
 
 import net.sourceforge.jitl.Jitl;
@@ -55,10 +58,9 @@ public class ScheduleHandler {
         if (time == null) {
             return "";
         }
-        String formattedTime = DateFormat.format(isAMPM ? "hh:mm a" : "HH:mm", time).toString();
-        if (isAMPM && (formattedTime.startsWith("0") || formattedTime.startsWith("٠"))) {
-            formattedTime = " " + formattedTime.substring(1);
-        }
+        String pattern = isAMPM ? "h:mm a" : "HH:mm";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
+        String formattedTime = sdf.format(time);
         if (extremes[i]) {
             formattedTime += " *";
         }
@@ -66,7 +68,10 @@ public class ScheduleHandler {
     }
 
     public static short getNextTimeIndex(GregorianCalendar[] schedule) {
-        Calendar now = new GregorianCalendar();
+        return getNextTimeIndex(schedule, new GregorianCalendar());
+    }
+
+    public static short getNextTimeIndex(GregorianCalendar[] schedule, Calendar now) {
         if (now.before(schedule[CONSTANT.FAJR])) return CONSTANT.FAJR;
         for (short i = CONSTANT.FAJR; i < CONSTANT.NEXT_FAJR; i++) {
             if (now.after(schedule[i]) && now.before(schedule[i + 1])) {
@@ -77,8 +82,12 @@ public class ScheduleHandler {
     }
 
     public static String getHijriDateString(fi.joensuu.joyds1.calendar.Calendar hijriDate, GregorianCalendar[] schedule, String[] hijriMonths, String anooHegirae) {
+        return getHijriDateString(hijriDate, schedule, hijriMonths, anooHegirae, new GregorianCalendar());
+    }
+
+    public static String getHijriDateString(fi.joensuu.joyds1.calendar.Calendar hijriDate, GregorianCalendar[] schedule, String[] hijriMonths, String anooHegirae, Calendar now) {
         boolean addedDay = false;
-        if (isAfterSunset(schedule)) {
+        if (isAfterSunset(schedule, now)) {
             addedDay = true;
             hijriDate.addDays(1);
         }
@@ -91,8 +100,7 @@ public class ScheduleHandler {
         return day + " " + month + ", " + year + " " + anooHegirae;
     }
 
-    private static boolean isAfterSunset(GregorianCalendar[] schedule) {
-        Calendar now = new GregorianCalendar();
+    private static boolean isAfterSunset(GregorianCalendar[] schedule, Calendar now) {
         return now.after(schedule[CONSTANT.MAGHRIB]);
     }
 
