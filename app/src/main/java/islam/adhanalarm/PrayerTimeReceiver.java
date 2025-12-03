@@ -22,6 +22,9 @@ public class PrayerTimeReceiver extends BroadcastReceiver {
                 case CONSTANT.ACTION_UPDATE_WIDGET:
                     updateWidgets(context);
                     break;
+                case CONSTANT.ACTION_LOCATION_UPDATED:
+                    // Do nothing
+                    break;
                 default:
                     showPrayerTimeNotification(context, intent);
                     break;

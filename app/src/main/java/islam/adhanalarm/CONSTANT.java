@@ -6,6 +6,7 @@ import net.sourceforge.jitl.Rounding;
 public class CONSTANT {
     public static final String ACTION_UPDATE_PRAYER_TIMES = "islam.adhanalarm.ACTION_UPDATE_PRAYER_TIMES";
     public static final String ACTION_UPDATE_WIDGET = "islam.adhanalarm.ACTION_UPDATE_WIDGET";
+    public static final String ACTION_LOCATION_UPDATED = "islam.adhanalarm.ACTION_LOCATION_UPDATED";
     public static final short FAJR = 0;
     public static final short SUNRISE = 1;
     public static final short DHUHR = 2;
