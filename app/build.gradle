@@ -92,3 +92,12 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4"
     debugImplementation "androidx.compose.ui:ui-test-manifest"
 }
+
+project.afterEvaluate {
+    tasks.named('assembleDebug').configure {
+        dependsOn 'testDebugUnitTest'
+    }
+    tasks.named('assembleRelease').configure {
+        dependsOn 'testReleaseUnitTest'
+    }
+}

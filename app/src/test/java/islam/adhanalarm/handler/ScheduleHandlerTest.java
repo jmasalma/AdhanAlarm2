@@ -85,23 +85,12 @@ public class ScheduleHandlerTest {
     @Test
     public void testGetFormattedTime() {
         // --- AM/PM format (12-hour) ---
-        String fajrActual = ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.FAJR, "0");
-        assertTrue(fajrActual.startsWith("5:00"));
-        assertTrue(fajrActual.toLowerCase().contains("am"));
-
-        String dhuhrActual = ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.DHUHR, "0");
-        assertTrue(dhuhrActual.startsWith("12:00"));
-        assertTrue(dhuhrActual.toLowerCase().contains("pm"));
-
-        String ishaaActual = ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.ISHAA, "0");
-        assertTrue(ishaaActual.startsWith("7:00"));
-        assertTrue(ishaaActual.toLowerCase().contains("pm"));
+        assertEquals("5:00 AM", ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.FAJR, "0"));
+        assertEquals("12:00 PM", ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.DHUHR, "0"));
+        assertEquals("7:00 PM", ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.ISHAA, "0"));
 
         // Test extreme time formatting
-        String asrActual = ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.ASR, "0");
-        assertTrue(asrActual.startsWith("3:00"));
-        assertTrue(asrActual.toLowerCase().contains("pm"));
-        assertTrue(asrActual.endsWith(" *"));
+        assertEquals("3:00 PM *", ScheduleHandler.getFormattedTime(schedule, extremes, CONSTANT.ASR, "0"));
 
 
         // --- 24-hour format ---
