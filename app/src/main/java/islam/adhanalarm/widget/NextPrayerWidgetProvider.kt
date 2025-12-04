@@ -2,12 +2,16 @@ package islam.adhanalarm.widget
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
+import android.os.SystemClock
 import android.widget.RemoteViews
 import islam.adhanalarm.R
 import islam.adhanalarm.handler.ScheduleHandler
 import islam.adhanalarm.repo.PrayerTimesRepository
 import java.util.Calendar
 
+/**
+ * App widget provider for the "Next Prayer" widget.
+ */
 class NextPrayerWidgetProvider : BaseWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -16,6 +20,13 @@ class NextPrayerWidgetProvider : BaseWidgetProvider() {
         }
     }
 
+    /**
+     * Updates the widget with the next prayer time and a countdown.
+     *
+     * @param context The context.
+     * @param appWidgetManager The app widget manager.
+     * @param appWidgetId The app widget ID.
+     */
     private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
         val views = RemoteViews(context.packageName, R.layout.next_prayer_widget)
         val repository = PrayerTimesRepository(context)
@@ -25,11 +36,15 @@ class NextPrayerWidgetProvider : BaseWidgetProvider() {
             val nextPrayer = schedule.nextTimeIndex
             val prayerName = getPrayerName(context, nextPrayer)
             val prayerTime = ScheduleHandler.getFormattedTime(schedule.schedule, schedule.extremes, nextPrayer, "0")
+            val prayerTimeMillis = schedule.schedule[nextPrayer.toInt()].timeInMillis
+            val now = System.currentTimeMillis()
+            val diff = prayerTimeMillis - now
 
             views.setTextViewText(R.id.prayer_name, prayerName)
             views.setTextViewText(R.id.prayer_time, prayerTime)
+            views.setChronometer(R.id.countdown, SystemClock.elapsedRealtime() + diff, null, true)
 
-            scheduleNextUpdate(context, appWidgetId, schedule.schedule[nextPrayer.toInt()].timeInMillis, NextPrayerWidgetProvider::class.java)
+            scheduleNextUpdate(context, appWidgetId, prayerTimeMillis, NextPrayerWidgetProvider::class.java)
         } else {
             views.setTextViewText(R.id.prayer_name, "Error")
             views.setTextViewText(R.id.prayer_time, " ")
