@@ -28,11 +28,18 @@ git push origin --tags
 
 ### Fixs
 Done - when the app first starts after being installed or data cleared, the today tab is empty.  It populates after I go to settings an click get GPS Location
+- Fix deprecated calls:
+- w: file:///home/runner/work/AdhanAlarm2/AdhanAlarm2/app/src/main/java/islam/adhanalarm/MainViewModel.kt:7:47 'LocalBroadcastManager' is deprecated. Deprecated in Java
+- w: file:///home/runner/work/AdhanAlarm2/AdhanAlarm2/app/src/main/java/islam/adhanalarm/MainViewModel.kt:80:9 'LocalBroadcastManager' is deprecated. Deprecated in Java
+Done - Fix fajr and ishaa prayer times
+- ? show hijri date in today tab in the app
+
 
 ### Fix notifications
 Done - Remove it
 Done - Ask AI to add it again
 Done ? - seems to be working now! - Not working, could be because latest android does not show notifications form sideloaded app, try on an older android...
+- Dismiss the before notification when next prayer time notification happens
 
 ### Fix widgets
 Done - Remove it and then ask AI to add it again.
@@ -41,19 +48,23 @@ Done - Make widget style/color to match app
 ? - Adjust size of widgets so the text shrinks and grows based on size of the widget.
 Done - Make smaller widget match app style and make it a 1x1 if possible
 Done - Make larger widget default to 4x4
-- Make widget narrower
-- reformat 1x1 widget
+Done - reformat 1x1 widget
+- show count down to next in 1x2 widget
+- adjust 4x4 widget to be slightly narrower
+- add count down to next prayer in the 1x2 widget
+- clicking on widget should open the app
 
 ### Fix automatic calculation method by region
 Done - Make ISNA the default calculation method
-- Fix so the right calculation method is used per region
+- Fix so the right calculation method is used per region automatically
 
 ### Remove localization, english only for now...
 Done - Can add it later...
 - start with arabic, etc.
 
 ### Harden
-- Add tests
+Done - Add tests
+- Add code inline docs
 
 
 ## Add the following setup scripts
