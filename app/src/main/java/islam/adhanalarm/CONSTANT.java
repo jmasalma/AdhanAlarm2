@@ -15,13 +15,13 @@ public class CONSTANT {
     public static final short ISHAA = 5;
     public static final short NEXT_FAJR = 6;
     public static final String[][] CALCULATION_METHOD_COUNTRY_CODES = new String[0][];
-    public static final String DEFAULT_CALCULATION_METHOD = "4";
+    public static final String DEFAULT_CALCULATION_METHOD = "1";
     public static final String DEFAULT_ROUNDING_TYPE = "2";
     public static final int DEFAULT_TIME_FORMAT = 0;
     public static final int NOTIFICATION_ID_OFFSET = 10;
     public static final int REQUEST_CODE_OFFSET = 10;
     public static final Method[] CALCULATION_METHODS = {
-            new Method(16, 14, 1.5, 0, 0, 0, Rounding.SPECIAL, net.sourceforge.jitl.Mathhab.SHAAFI, 48.5, net.sourceforge.jitl.ExtremeLatitude.GOOD_INVALID, false, 0, 0, 0, 0, 0, 0),
+            new Method(18, 18, 1.5, 0, 0, 0, Rounding.SPECIAL, net.sourceforge.jitl.Mathhab.SHAAFI, 48.5, net.sourceforge.jitl.ExtremeLatitude.GOOD_INVALID, false, 0, 0, 0, 0, 0, 0),
             Method.ISNA,
             Method.MUSLIM_LEAGUE,
             Method.UMM_ALQURRA,
