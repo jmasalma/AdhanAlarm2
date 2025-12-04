@@ -1,9 +1,7 @@
 package islam.adhanalarm;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -18,9 +16,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
+
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -28,8 +27,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import islam.adhanalarm.handler.LocationHandler;
 
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     final Set<String> PREFS_TO_UPDATE_SUMMARY = new HashSet<>(Arrays.asList(
@@ -42,14 +39,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             "offsetMinutes"
     ));
     private SharedPreferences mEncryptedSharedPreferences;
-    private LocationHandler mLocationHandler;
+    private MainViewModel mViewModel;
     private Observer<Location> mLocationObserver;
-    private BroadcastReceiver mLocationUpdatedReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+
+        mViewModel = new MainViewModel(getActivity().getApplication());
 
         try {
             MasterKey masterKey = new MasterKey.Builder(getActivity(), MasterKey.DEFAULT_MASTER_KEY_ALIAS)
@@ -69,7 +67,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             return;
         }
 
-        mLocationHandler = new LocationHandler((LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE));
         mLocationObserver = new Observer<Location>() {
             @Override
             public void onChanged(@Nullable Location currentLocation) {
@@ -92,24 +89,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 EditTextPreference longitudePref = (EditTextPreference) findPreference("longitude");
                 longitudePref.setText(longitude);
                 updateSummary(longitudePref);
+
+                syncEncryptedToUi();
+                updateSummaries();
             }
         };
-        mLocationHandler.getLocation().observeForever(mLocationObserver);
-
-
-        mLocationUpdatedReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(CONSTANT.ACTION_LOCATION_UPDATED)) {
-                    syncEncryptedToUi();
-                    updateSummaries();
-                }
-            }
-        };
+        mViewModel.getLocation().observeForever(mLocationObserver);
 
         findPreference("lookupGPS").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                mLocationHandler.update();
+                mViewModel.updateLocation();
                 return true;
             }
         });
@@ -133,8 +122,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mLocationHandler != null && mLocationObserver != null) {
-            mLocationHandler.getLocation().removeObserver(mLocationObserver);
+        if (mViewModel != null && mLocationObserver != null) {
+            mViewModel.getLocation().removeObserver(mLocationObserver);
         }
     }
 
@@ -148,8 +137,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         syncEncryptedToUi();
 
         updateSummaries();
-
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mLocationUpdatedReceiver, new IntentFilter(CONSTANT.ACTION_LOCATION_UPDATED));
     }
 
     private void syncEncryptedToUi() {
@@ -181,7 +168,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public void onPause() {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
-        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(mLocationUpdatedReceiver);
     }
 
     @Override

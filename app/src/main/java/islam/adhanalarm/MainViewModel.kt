@@ -2,9 +2,7 @@ package islam.adhanalarm
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.hardware.SensorManager
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
@@ -26,6 +24,11 @@ import net.sourceforge.jitl.astro.Direction
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+/**
+ * ViewModel for the main screen, responsible for managing location, prayer times, and qibla direction.
+ *
+ * @param application The application context.
+ */
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {
@@ -47,13 +50,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     private val _scheduleData = MediatorLiveData<ScheduleData>()
+    /**
+     * LiveData holding the prayer time schedule.
+     */
     val scheduleData: LiveData<ScheduleData> = _scheduleData
 
     private val _qiblaDirection = MediatorLiveData<Double>()
+    /**
+     * LiveData holding the qibla direction in degrees from North.
+     */
     val qiblaDirection: LiveData<Double> = _qiblaDirection
 
+    /**
+     * LiveData holding the direction of North in degrees.
+     */
     val northDirection: LiveData<Float>
     private val _location = MediatorLiveData<Location>()
+    /**
+     * LiveData holding the current location.
+     */
     val location: LiveData<Location> = _location
 
     init {
@@ -76,24 +91,34 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .putString(KEY_LATITUDE, location.latitude.toString())
             .putString(KEY_LONGITUDE, location.longitude.toString())
             .apply()
-        val intent = Intent(CONSTANT.ACTION_LOCATION_UPDATED)
-        LocalBroadcastManager.getInstance(getApplication()).sendBroadcast(intent)
     }
 
+    /**
+     * Starts tracking the compass for qibla and north direction.
+     */
     fun startCompass() {
         compassHandler.startTracking()
     }
 
+    /**
+     * Stops tracking the compass.
+     */
     fun stopCompass() {
         compassHandler.stopTracking()
     }
 
+    /**
+     * Requests a location update.
+     */
     fun updateLocation() {
         viewModelScope.launch(Dispatchers.IO) {
             locationHandler.update()
         }
     }
 
+    /**
+     * Loads the location from settings, or uses a default location if none is saved.
+     */
     fun loadLocationFromSettings() {
         val latitude = settings.getString(KEY_LATITUDE, null)
         val longitude = settings.getString(KEY_LONGITUDE, null)
@@ -115,6 +140,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /**
+     * Updates the prayer time schedule and qibla direction based on the provided location.
+     *
+     * @param loc The location to use for the calculations.
+     */
     fun updateData(loc: Location) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {

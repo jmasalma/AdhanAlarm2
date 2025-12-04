@@ -18,7 +18,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import fi.joensuu.joyds1.calendar.IslamicCalendar;
 import islam.adhanalarm.CONSTANT;
 
 @RunWith(AndroidJUnit4.class)
@@ -113,26 +112,5 @@ public class ScheduleHandlerTest {
 
         now.set(Calendar.HOUR_OF_DAY, 4); // 4:00 AM
         assertEquals(CONSTANT.FAJR, ScheduleHandler.getNextTimeIndex(schedule, now));
-    }
-
-    @Test
-    public void testGetHijriDateString() {
-        // Given a known Hijri date for Jan 1, 2024 (19 Jumada al-thani 1445)
-        IslamicCalendar hijriDate = new IslamicCalendar(1445, 6, 19);
-
-        String[] hijriMonths = new String[]{"Muharram", "Safar", "Rabi' al-awwal", "Rabi' al-thani",
-                "Jumada al-awwal", "Jumada al-thani", "Rajab", "Sha'ban", "Ramadan", "Shawwal",
-                "Dhu al-Qi'dah", "Dhu al-Hijjah"};
-        String anooHegirae = "AH";
-
-        // Test before sunset
-        Calendar now = new GregorianCalendar(2024, Calendar.JANUARY, 1, 16, 0, 0); // 4:00 PM
-        String expectedDate = "19 Jumada al-thani, 1445 AH";
-        assertEquals(expectedDate, ScheduleHandler.getHijriDateString(hijriDate, schedule, hijriMonths, anooHegirae, now));
-
-        // Test after sunset
-        now.set(Calendar.HOUR_OF_DAY, 18); // 6:00 PM
-        String expectedDateAfterSunset = "20 Jumada al-thani, 1445 AH";
-        assertEquals(expectedDateAfterSunset, ScheduleHandler.getHijriDateString(hijriDate, schedule, hijriMonths, anooHegirae, now));
     }
 }

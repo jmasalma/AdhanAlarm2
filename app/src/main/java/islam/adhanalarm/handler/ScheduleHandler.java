@@ -44,9 +44,7 @@ public class ScheduleHandler {
         }
         schedule[CONSTANT.NEXT_FAJR].add(Calendar.DAY_OF_MONTH, 1); // Next fajr is tomorrow
 
-        fi.joensuu.joyds1.calendar.IslamicCalendar hijriDate = new fi.joensuu.joyds1.calendar.IslamicCalendar();
-
-        return new ScheduleData(schedule, extremes, hijriDate, getNextTimeIndex(schedule));
+        return new ScheduleData(schedule, extremes, getNextTimeIndex(schedule));
     }
 
     public static String getFormattedTime(GregorianCalendar[] schedule, boolean[] extremes, short i, String timeFormatIndex) {
@@ -79,29 +77,6 @@ public class ScheduleHandler {
             }
         }
         return CONSTANT.NEXT_FAJR;
-    }
-
-    public static String getHijriDateString(fi.joensuu.joyds1.calendar.Calendar hijriDate, GregorianCalendar[] schedule, String[] hijriMonths, String anooHegirae) {
-        return getHijriDateString(hijriDate, schedule, hijriMonths, anooHegirae, new GregorianCalendar());
-    }
-
-    public static String getHijriDateString(fi.joensuu.joyds1.calendar.Calendar hijriDate, GregorianCalendar[] schedule, String[] hijriMonths, String anooHegirae, Calendar now) {
-        boolean addedDay = false;
-        if (isAfterSunset(schedule, now)) {
-            addedDay = true;
-            hijriDate.addDays(1);
-        }
-        String day = String.valueOf(hijriDate.getDay());
-        String month = hijriMonths[hijriDate.getMonth() - 1];
-        String year = String.valueOf(hijriDate.getYear());
-        if (addedDay) {
-            hijriDate.addDays(-1); // Revert to the day independent of sunset
-        }
-        return day + " " + month + ", " + year + " " + anooHegirae;
-    }
-
-    private static boolean isAfterSunset(GregorianCalendar[] schedule, Calendar now) {
-        return now.after(schedule[CONSTANT.MAGHRIB]);
     }
 
     public static Location getLocation(String latitude, String longitude, String altitude, String pressure, String temperature) {
