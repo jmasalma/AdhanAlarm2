@@ -9,6 +9,9 @@ import android.content.Intent;
 import islam.adhanalarm.widget.AllDayPrayersWidgetProvider;
 import islam.adhanalarm.widget.NextPrayerWidgetProvider;
 
+/**
+ * BroadcastReceiver for handling prayer time notifications and widget updates.
+ */
 public class PrayerTimeReceiver extends BroadcastReceiver {
 
     @Override
@@ -34,11 +37,28 @@ public class PrayerTimeReceiver extends BroadcastReceiver {
         }
     }
 
+    /**
+     * Shows a notification for the prayer time.
+     * If the notification is a regular prayer time notification, it will dismiss the corresponding "before" notification.
+     *
+     * @param context The context.
+     * @param intent The intent containing the prayer name and notification ID.
+     */
     private void showPrayerTimeNotification(Context context, Intent intent) {
         String prayerName = intent.getStringExtra("prayer_name");
         int notificationId = intent.getIntExtra("notification_id", 1);
-        String notificationTitle = "Prayer Time";
-        String notificationMessage = "It's time for " + prayerName;
+        String notificationTitle;
+        String notificationMessage;
+
+        if (notificationId < CONSTANT.NOTIFICATION_ID_OFFSET) {
+            NotificationHelper.cancelNotification(context, notificationId + CONSTANT.NOTIFICATION_ID_OFFSET);
+            notificationTitle = "Prayer Time";
+            notificationMessage = "It's time for " + prayerName;
+        } else {
+            notificationTitle = "Upcoming Prayer";
+            notificationMessage = prayerName;
+        }
+
         NotificationHelper.showNotification(context, notificationTitle, notificationMessage, notificationId);
     }
 
