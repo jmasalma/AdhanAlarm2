@@ -21,7 +21,7 @@ public class CONSTANT {
     public static final int NOTIFICATION_ID_OFFSET = 10;
     public static final int REQUEST_CODE_OFFSET = 10;
     public static final Method[] CALCULATION_METHODS = {
-            new Method(16, 14, 1.5, 0, 0, 0, Rounding.SPECIAL, net.sourceforge.jitl.Mathhab.SHAAFI, 48.5, net.sourceforge.jitl.ExtremeLatitude.GOOD_INVALID, false, 0, 0, 0, 0, 0, 0),
+            new Method(18, 18, 1.5, 0, 0, 0, Rounding.SPECIAL, net.sourceforge.jitl.Mathhab.SHAAFI, 48.5, net.sourceforge.jitl.ExtremeLatitude.GOOD_INVALID, false, 0, 0, 0, 0, 0, 0),
             Method.ISNA,
             Method.MUSLIM_LEAGUE,
             Method.UMM_ALQURRA,
