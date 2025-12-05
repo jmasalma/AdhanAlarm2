@@ -26,17 +26,25 @@ git push origin --tags
 
 ## ToDo
 
+
+Can you do the following:
+- Make 4x4 widget into a 3x4 
+- Make "Version: 3.0" text in Setting Information section to pull version number from git based on latest tag 
+- request notification permission on app first start similar to location permission
+
+
 ### Fixs
 Done - when the app first starts after being installed or data cleared, the today tab is empty.  It populates after I go to settings an click get GPS Location
 Done - Fix deprecated calls:
 Done - w: file:///home/runner/work/AdhanAlarm2/AdhanAlarm2/app/src/main/java/islam/adhanalarm/MainViewModel.kt:7:47 'LocalBroadcastManager' is deprecated. Deprecated in Java
 Done - w: file:///home/runner/work/AdhanAlarm2/AdhanAlarm2/app/src/main/java/islam/adhanalarm/MainViewModel.kt:80:9 'LocalBroadcastManager' is deprecated. Deprecated in Java
 Done - Fix fajr and ishaa prayer times
-- show hijri date in today tab in the app, in default language
-- Add build date and latest version tag to the information section at the bottom of the setting page
-- Setting to update long/lat once permissions are granted.
+Done - show hijri date in today tab in the app, in default language
+Done - Add build date and latest version tag to the information section at the bottom of the setting page
+Done - Setting to update long/lat once permissions are granted.
 - check and fix notifications as they seem to trigger at wrong times (extra triggers)
-
+- auto pick version in info section from git
+- use targetCellWidth and targetCellHeight instead of minWidth and minHeight for widgets
 
 ### Fix notifications
 Done - Remove it
@@ -44,8 +52,8 @@ Done - Ask AI to add it again
 Done ? - seems to be working now! - Not working, could be because latest android does not show notifications form sideloaded app, try on an older android...
 Done - Dismiss the before notification when next prayer time notification happens
 - request notification permission on app first start similar to location permission
-- update small notification count down and show seconds as well...
-- Make sure countdown is updated live
+Done - update small notification count down and show seconds as well...
+Done - Make sure countdown is updated live
 
 ### Fix widgets
 Done - Remove it and then ask AI to add it again.
@@ -55,9 +63,12 @@ Done - Make widget style/color to match app
 Done - Make smaller widget match app style and make it a 1x1 if possible
 Done - Make larger widget default to 4x4
 Done - reformat 1x1 widget
-- show count down to next prayer in 1x2 widget
+Done - show count down to next prayer in 1x2 widget
 - adjust 4x4 widget to be slightly narrower
 Done - clicking on widget should open the app
+
+
+
 
 ### Fix automatic calculation method by region
 Done - Make ISNA the default calculation method
@@ -69,7 +80,7 @@ Done - Can add it later...
 
 ### Harden
 Done - Add tests
-- Add code inline docs
+Done - Add code inline docs
 
 
 ## Add the following setup scripts
